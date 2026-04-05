@@ -1,0 +1,74 @@
+@{
+  Layout = "/Pages/Email/_Layout.cshtml";
+}
+@model WeighForce.Data.EF.Report
+
+
+<h1>Dispatch Summary for @Model.StartDate</h1>
+@foreach (var location in @Model.Locations)
+{
+  <div class="w-max mb-8">
+  <h2>@location.Name</h2>
+  <h3>
+    Trucks Dispatched: <b>@location.Total</b>
+  </h3>
+  @foreach (var summary in @location.Summary)
+    {
+      <div class="p-2 border border-primary border-2 m-2">
+        <p>
+          @if (@summary.Product != null)
+          {
+            @summary.Product
+          }
+          else
+          {
+            <i>Unknown</i>
+          }
+          - <b>@(summary.Amount / 1000) Tonnes</b>
+        </p>
+      </div>
+    }
+    <div>
+      @if (location.Total > 0)
+      {
+        <h2>Dispatches</h2>
+        <table>
+          <thead>
+            <td><b>Destination</b></td>
+            <td><b>Contract</b></td>
+            <td><b>Product</b></td>
+            <td><b>Number Plate</b></td>
+            <td><b>Nett (Tonnes)</b></td>
+          </thead>
+          @foreach (var dispatch in location.Dispatches)
+          {
+            <tr>
+              <td>@dispatch.Booking.TransportInstruction.ToLocation.Name</td>
+              <td>@if (@dispatch.Booking.TransportInstruction.Contract?.ContractNumber != null)
+                {
+                  @dispatch.Booking.TransportInstruction.Contract.ContractNumber
+                }
+                else
+                {
+                  <i>Unknown</i>
+                }
+              </td>
+              <td>@if (@dispatch.Booking.TransportInstruction.Product.Name != null)
+                {
+                  @dispatch.Booking.TransportInstruction.Product.Name
+                }
+                else
+                {
+                  <i>Unknown</i>
+                }
+              </td>
+              <td>@dispatch.Booking.NumberPlate</td>
+              <td>@((dispatch.InitialWeight.Gross - dispatch.InitialWeight.Tare)/1000)</td>
+            </tr>
+          }
+        </table>
+      }
+    </div>
+  </div>
+  <hr />
+}

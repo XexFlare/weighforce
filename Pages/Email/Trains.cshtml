@@ -1,0 +1,44 @@
+@{
+  Layout = "/Pages/Email/_Layout.cshtml";
+}
+@model System.Collections.Generic.List<WeighForce.Models.Dispatch>
+
+<h1>The following wagons have been received</h1>
+
+<div class="w-max mb-8">
+  <table>
+    <thead>
+      <td><b>Train Number</b></td>
+      <td><b>Wagon Number</b></td>
+      <td><b>Product</b></td>
+      <td><b>Contract</b></td>
+      <td><b>Dispatched Tare</b></td>
+      <td><b>Dispatched Gross</b></td>
+      <td><b>Dispatched Nett</b></td>
+      <td><b>Received Tare</b></td>
+      <td><b>Received Gross</b></td>
+      <td><b>Received Nett</b></td>
+      <td><b>Difference</b></td>
+    </thead>
+    @foreach (var dispatch in @Model)
+    {
+      <tr>
+        <td>@dispatch.Booking.TrailerNumber</td>
+        <td>@dispatch.Booking.NumberPlate</td>
+        <td>@dispatch.Booking.TransportInstruction.Product.Name</td>
+        <td>@dispatch.Booking.TransportInstruction.Contract.ContractNumber</td>
+        <td>@dispatch.InitialWeight.Tare</td>
+        <td>@dispatch.InitialWeight.Gross</td>
+        <td>@(dispatch.InitialWeight.Gross - dispatch.InitialWeight.Tare)</td>
+        <td>@dispatch.ReceivalWeight.Tare</td>
+        <td>@dispatch.ReceivalWeight.Gross</td>
+        @if(@dispatch.ReceivalWeight.Tare == 0) {
+          <td>-</td>
+        } else {
+          <td>@(@dispatch.ReceivalWeight.Gross - @dispatch.ReceivalWeight.Tare)</td>
+        }
+        <td>@(@dispatch.InitialWeight.Gross - @dispatch.ReceivalWeight.Gross)</td>
+      </tr>
+    }
+  </table>
+</div>

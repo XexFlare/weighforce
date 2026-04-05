@@ -1,0 +1,29 @@
+@{
+  Layout = "/Pages/Email/_Layout.cshtml";
+}
+@model System.Collections.Generic.List<WeighForce.Data.EF.TransporterMismatch>
+
+<h1>Transporter Mismatch Report</h1>
+The following trucks have been found with different Transporters
+<div class="w-max mb-8">
+  <table>
+    <thead>
+      <td><b>Numberplate</b></td>
+      <td><b>Transporter</b></td>
+      <td><b>Previous Transporter</b></td>
+      <td><b>Done By</b></td>
+      <td><b>Ticket Number</b></td>
+    </thead>
+    @foreach (var details in @Model)
+    {
+      <tr>
+        <td>@details.NumberPlate</td>
+        <td>@details.Transporter</td>
+        <td>@details.Previous</td>
+        <td>@details.DoneBy</td>
+        <td>@details.TicketNumber</td>
+      </tr>
+    }
+  </table>
+</div>
+<hr />

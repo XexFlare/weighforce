@@ -1,0 +1,35 @@
+@{
+  Layout = "/Pages/Email/_Layout.cshtml";
+}
+@model WeighForce.Data.EF.Report
+
+
+<h1>Weekly Dispatch Summary</h1>
+<h3>For <b>@Model.StartDate</b> to <b>@Model.EndDate</b></h3>
+@foreach (var location in @Model.Locations)
+{
+  <div class="w-max mb-8">
+  <h2>@location.Name</h2>
+  <h3>
+    Trucks Dispatched: <b>@location.Total</b>
+  </h3>
+  @foreach (var summary in @location.Summary)
+    {
+      <div class="p-2 border border-primary border-2 m-2">
+        <p>
+          @if (@summary.Product != null)
+          {
+            @summary.Product
+          }
+          else
+          {
+            <i>Unknown</i>
+          }
+          - <b>@(summary.Amount / 1000) Tonnes</b>
+        </p>
+      </div>
+
+    }
+  </div>
+  <hr />
+}

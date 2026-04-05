@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WeighForce.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    string returnUrl = null;
+    var query = ViewContext.HttpContext.Request.Query;
+    if (query.ContainsKey("returnUrl"))
+    {
+        returnUrl = query["returnUrl"];
+    }
+}
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a class="hover:bg-gray-900 px-4 py-2 rounded" asp-area="Identity" asp-page="/Account/Manage/Index"
+        title="Manage">Hello @User.Identity.Name!</a>
+        <form class="inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+            <button type="submit" class="hover:bg-gray-900 px-4 py-2 rounded">Logout</button>
+        </form>
+    }
+    else
+    {
+        <a class="hover:bg-gray-900 px-4 py-2 rounded" asp-area="Identity" asp-page="/Account/Login"
+        asp-route-returnUrl="@returnUrl">Login</a>
+        <a class="hover:bg-gray-900 px-4 py-2 rounded" asp-area="Identity" asp-page="/Account/ForgotPassword"
+        asp-route-returnUrl="@returnUrl">Forgot password?</a>
+    }
+</ul>

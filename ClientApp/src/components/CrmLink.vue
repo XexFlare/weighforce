@@ -1,0 +1,23 @@
+<template>
+  <a
+    href="https://crm.meridiancommodities.com/CRMFW/eware.dll/"
+    target="_blank"
+  >
+    <button
+      class="
+        hidden lg:block 
+        ml-2
+        px-6
+        py-2
+        bg-accent
+        text-white
+        rounded-full
+        h-24
+        w-24
+        hover:bg-primary
+      "
+    >
+      Kinetic
+    </button>
+  </a>
+</template>

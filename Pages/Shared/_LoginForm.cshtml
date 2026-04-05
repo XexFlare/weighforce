@@ -1,0 +1,83 @@
+<form id="account" method="post">
+    <hr />
+    <div
+        class="text-danger validation-summary-valid"
+        data-valmsg-summary="true"
+    >
+        <ul>
+        <li style="display: none"></li>
+        </ul>
+    </div>
+    <div>
+        <div class="border bg-gray-300">
+        📧
+        <input
+            class="bg-gray-300 w-10/12 focus:outline-none"
+            type="email"
+            data-val="true"
+            data-val-email="The Email field is not a valid e-mail address."
+            data-val-required="The Email field is required."
+            id="Input_Email"
+            name="Input.Email"
+            placeholder="Email Address"
+            value=""
+        />
+        </div>
+        <span
+        class="text-danger field-validation-valid"
+        data-valmsg-for="Input.Email"
+        data-valmsg-replace="true"
+        ></span>
+    </div>
+    <div class="mt-2 border bg-gray-300">
+        🔒
+        <input
+        class="bg-gray-300 w-10/12 focus:outline-none"
+        type="password"
+        data-val="true"
+        data-val-required="The Password field is required."
+        id="Input_Password"
+        name="Input.Password"
+        placeholder="Password"
+        />
+        <span
+        class="text-danger field-validation-valid"
+        data-valmsg-for="Input.Password"
+        data-valmsg-replace="true"
+        ></span>
+    </div>
+    <div class="mt-2">
+        <button
+        id="login-submit"
+        type="submit"
+        class="bg-primary text-white w-full py-2"
+        >
+        Log in
+        </button>
+    </div>
+    <div class="mt-2">
+        <a
+        class="border-2 hover:bg-gray-200 text-center text-primary block w-full p-2 my-4"
+        href="/login-forcehub"
+        >
+            Log in With ForceHub
+        </a>
+    </div>
+    <div class="mt-2">
+        <div class="checkbox">
+        <label for="Input_RememberMe">
+            <input
+            class="text-primary"
+            type="checkbox"
+            data-val="true"
+            data-val-required="The Remember me? field is required."
+            id="Input_RememberMe"
+            name="Input.RememberMe"
+            value="true"
+            />
+            Remember me?
+        </label>
+        </div>
+    </div>
+    <input name="Input.RememberMe" type="hidden" value="false" />
+</form>
